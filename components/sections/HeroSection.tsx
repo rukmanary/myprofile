@@ -26,13 +26,13 @@ export function HeroSection() {
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Parallax Background */}
-      <div 
+      <div
         ref={parallaxRef}
         className="absolute inset-0 parallax-element"
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-navy via-navy-dark to-black" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-        
+        <div className="absolute inset-0 bg-linear-to-br from-navy via-navy-dark to-black" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent" />
+
         {/* Animated Background Elements */}
         <div className="absolute top-20 left-20 w-72 h-72 bg-neon-cyan/10 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-20 right-20 w-96 h-96 bg-neon-purple/10 rounded-full blur-3xl animate-pulse delay-1000" />
@@ -97,20 +97,10 @@ export function HeroSection() {
             <Button
               variant="neon"
               size="lg"
-              onClick={() => scrollToSection('contact')}
-              className="w-full sm:w-auto"
-            >
-              <Mail className="w-5 h-5 mr-2" />
-              Let&apos;s Talk
-            </Button>
-            
-            <Button
-              variant="outline"
-              size="lg"
               onClick={() => window.open('/resume.pdf', '_blank')}
               className="w-full sm:w-auto"
             >
-              <Download className="w-5 h-5 mr-2" />
+              <Mail className="w-5 h-5 mr-2" />
               Download Resume
             </Button>
           </motion.div>
@@ -123,20 +113,20 @@ export function HeroSection() {
             className="grid grid-cols-2 sm:grid-cols-4 gap-8 pt-16"
           >
             <div className="text-center">
-              <div className="text-3xl sm:text-4xl font-bold text-neon-cyan">5+</div>
+              <div className="text-3xl sm:text-4xl font-bold text-neon-cyan">6+</div>
               <div className="text-gray-400 text-sm">Years Experience</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl sm:text-4xl font-bold text-neon-purple">50+</div>
-              <div className="text-gray-400 text-sm">Projects Completed</div>
+              <div className="text-3xl sm:text-4xl font-bold text-neon-purple">3</div>
+              <div className="text-gray-400 text-sm">Fortune-Level Clients</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl sm:text-4xl font-bold text-neon-cyan">30+</div>
-              <div className="text-gray-400 text-sm">Happy Clients</div>
+              <div className="text-3xl sm:text-4xl font-bold text-neon-cyan">5</div>
+              <div className="text-gray-400 text-sm">Enterprise Applications</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl sm:text-4xl font-bold text-neon-purple">24/7</div>
-              <div className="text-gray-400 text-sm">Support</div>
+              <div className="text-3xl sm:text-4xl font-bold text-neon-purple">100%</div>
+              <div className="text-gray-400 text-sm">Enterprise Scale</div>
             </div>
           </motion.div>
         </motion.div>
