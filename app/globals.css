@@ -178,3 +178,37 @@ body {
   outline: 2px solid var(--neon-cyan);
   outline-offset: 2px;
 }
+
+/* 3D Carousel Styles */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+/* Enhanced 3D Effects */
+.carousel-3d {
+  perspective: 1200px;
+  perspective-origin: center center;
+}
+
+.carousel-item-3d {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+/* Smooth 3D Transitions */
+.transition-3d {
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Glow Effects for 3D Elements */
+.glow-3d {
+  filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.3));
+}
+
+.glow-3d-active {
+  filter: drop-shadow(0 0 30px rgba(0, 255, 255, 0.6)) drop-shadow(0 0 60px rgba(0, 255, 255, 0.3));
+}
