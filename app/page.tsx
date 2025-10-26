@@ -3,6 +3,7 @@ import {
   HeroSection,
   PortfolioSection,
   AboutSection,
+  ResumeSection,
 } from '@/components/sections';
 
 export default function Home() {
@@ -11,6 +12,7 @@ export default function Home() {
       <HeroSection />
       <PortfolioSection />
       <AboutSection />
+      <ResumeSection />
     </MainLayout>
   );
 }

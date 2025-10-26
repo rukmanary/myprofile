@@ -48,3 +48,27 @@ export interface Feature {
   description: string;
   color: string;
 }
+
+export interface Experience {
+  id: string;
+  company: string;
+  position: string;
+  duration: string;
+  description: string[];
+  technologies: string[];
+}
+
+export interface Education {
+  id: string;
+  institution: string;
+  degree: string;
+  duration: string;
+  description?: string;
+}
+
+export interface TechStackItem {
+  name: string;
+  category: 'technology' | 'methodology' | 'tool';
+  logo: string;
+  color: string;
+}
