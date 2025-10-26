@@ -23,3 +23,19 @@ export interface NavItem {
   id: string;
   label: string;
 }
+
+export interface PortfolioItem {
+  id: string;
+  title: string;
+  description: string;
+  technologies: string[];
+  imageUrl: string;
+  liveUrl?: string;
+  githubUrl?: string;
+  featured: boolean;
+  category: string;
+  tools?: string[];
+  duration?: string;
+  role?: string;
+  isPrivateRepo?: boolean;
+}
