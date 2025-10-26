@@ -10,6 +10,8 @@ export interface PersonalInfo {
   };
   bio: string;
   avatar: string;
+  interests: string[];
+  additionalDescriptions: string[];
 }
 
 export interface SocialLink {
@@ -38,4 +40,11 @@ export interface PortfolioItem {
   duration?: string;
   role?: string;
   isPrivateRepo?: boolean;
+}
+
+export interface Feature {
+  icon: React.ComponentType<{ className?: string }>;
+  title: string;
+  description: string;
+  color: string;
 }
