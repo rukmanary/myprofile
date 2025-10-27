@@ -4,6 +4,7 @@ import {
   PortfolioSection,
   AboutSection,
   ResumeSection,
+  ContactSection,
 } from '@/components/sections';
 
 export default function Home() {
@@ -13,6 +14,7 @@ export default function Home() {
       <PortfolioSection />
       <AboutSection />
       <ResumeSection />
+      <ContactSection />
     </MainLayout>
   );
 }

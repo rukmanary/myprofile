@@ -72,3 +72,10 @@ export interface TechStackItem {
   logo: string;
   color: string;
 }
+
+export interface ContactFormData {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+}
