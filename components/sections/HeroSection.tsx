@@ -2,13 +2,15 @@
 
 import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { ChevronDown, Download, Mail } from 'lucide-react';
+import { ChevronDown, Mail } from 'lucide-react';
 import { personalInfo } from '@/lib/data';
 import { Button } from '@/components/ui/Button';
 import { scrollToSection } from '@/lib/utils';
+import { useUserRegion } from '@/hooks/useUserRegion';
 
 export function HeroSection() {
   const parallaxRef = useRef<HTMLDivElement>(null);
+  const { greeting, isLoading } = useUserRegion();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,7 +49,35 @@ export function HeroSection() {
           transition={{ duration: 0.8 }}
           className="space-y-8"
         >
-          {/* Greeting */}
+          {/* Basmalah */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-lg sm:text-xl text-gray-400 font-medium mb-2"
+            style={{ fontFamily: 'serif' }}
+          >
+            بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم
+          </motion.p>
+
+          {/* Regional Greeting */}
+          {!isLoading && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              className="text-lg sm:text-xl text-gray-300 font-medium mb-2"
+            >
+              {greeting.local && (
+                <span className="mr-2" style={{ fontFamily: greeting.local.includes('أهلاً') || greeting.local.includes('欢迎') || greeting.local.includes('いらっしゃいませ') || greeting.local.includes('환영합니다') || greeting.local.includes('Добро') ? 'serif' : 'inherit' }}>
+                  {`${greeting.local} -`}
+                </span>
+              )}
+              <span>{greeting.english}</span>
+            </motion.div>
+          )}
+
+          {/* Hello I'm */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
