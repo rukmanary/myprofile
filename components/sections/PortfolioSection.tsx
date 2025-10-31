@@ -12,25 +12,26 @@ import {
   ProjectTools,
   ProjectRole
 } from '@/components/ui/portfolio';
-import { ExternalLink, Github } from 'lucide-react';
+import { ExternalLink, Github, X } from 'lucide-react';
+import { getImageUrl } from '@/lib/utils';
 
 export function PortfolioSection() {
   const [activeProjectIndex, setActiveProjectIndex] = useState(0);
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
   const [isRoleExpanded, setIsRoleExpanded] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const activeProject = portfolioItems[activeProjectIndex];
 
   // Reset description and role expansion when project changes
   useEffect(() => {
     setIsDescriptionExpanded(false);
     setIsRoleExpanded(false);
+    setIsModalOpen(false);
   }, [activeProjectIndex]);
 
   const handleProjectSelect = (index: number) => {
     setActiveProjectIndex(index);
   };
-
-
 
   const toggleDescription = () => {
     setIsDescriptionExpanded(!isDescriptionExpanded);
@@ -40,29 +41,18 @@ export function PortfolioSection() {
     setIsRoleExpanded(!isRoleExpanded);
   };
 
-  return (
-    <section id="portfolio" className="relative min-h-screen overflow-hidden">
-      {/* Background Image with Overlay */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={activeProject.id}
-          initial={{ opacity: 0, scale: 1.1 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.9 }}
-          transition={{ duration: 0.8 }}
-          className="absolute inset-0 z-0"
-        >
-          <div
-            className="w-full h-full bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: `url(${activeProject.imageUrl})` }}
-          />
-          <div className="absolute inset-0 bg-black/40" />
-          <div className="absolute inset-0 bg-linear-to-r from-black/80 via-black/60 to-transparent" />
-        </motion.div>
-      </AnimatePresence>
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
 
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  return (
+    <section id="portfolio" className="relative min-h-screen bg-gray-900">
       {/* Main Content */}
-      <div className="relative z-10 min-h-screen flex flex-col">
+      <div className="min-h-screen flex flex-col">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pb-16 sm:pb-20 lg:pb-24">
           {/* Header Section with Title and Extended Carousel */}
           <div className="flex flex-col xl:flex-row xl:items-center xl:justify-between pt-20 pb-8 gap-8">
@@ -93,7 +83,7 @@ export function PortfolioSection() {
             />
           </div>
 
-          {/* Project Details Section - Full Width */}
+          {/* Project Details Section - New Layout */}
           <div className="flex-1 flex items-start">
             <AnimatePresence mode="wait">
               <motion.div
@@ -104,12 +94,42 @@ export function PortfolioSection() {
                 transition={{ duration: 0.6 }}
                 className="w-full space-y-8"
               >
-                {/* Project Title & Category */}
-                <ProjectDetails
-                  project={activeProject}
-                  isDescriptionExpanded={isDescriptionExpanded}
-                  onToggleDescription={toggleDescription}
-                />
+                {/* Project Title & Description with Image Thumbnail */}
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+                  {/* Left side - Title and Description */}
+                  <div className="lg:col-span-2 space-y-6">
+                    <ProjectDetails
+                      project={activeProject}
+                      isDescriptionExpanded={isDescriptionExpanded}
+                      onToggleDescription={toggleDescription}
+                    />
+                  </div>
+                  
+                  {/* Right side - Image Thumbnail */}
+                  <div className="lg:col-span-1">
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.3 }}
+                      className="relative group cursor-pointer"
+                      onClick={openModal}
+                    >
+                      <div className="relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 group-hover:scale-105">
+                        <img
+                          src={getImageUrl(activeProject.imageUrl)}
+                          alt={activeProject.title}
+                          className="w-48 h-28 sm:w-56 sm:h-32 lg:w-64 lg:h-36 object-cover mx-auto"
+                        />
+                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
+                          <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/20 backdrop-blur-sm rounded-full p-3">
+                            <ExternalLink className="w-6 h-6 text-white" />
+                          </div>
+                        </div>
+                      </div>
+                      <p className="text-sm text-gray-400 mt-2 text-center">Click to view full image</p>
+                    </motion.div>
+                  </div>
+                </div>
 
                 {/* Project Meta Info */}
                 <ProjectMetaInfo project={activeProject} />
@@ -165,6 +185,51 @@ export function PortfolioSection() {
           </div>
         </div>
       </div>
+
+      {/* Image Modal */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+            onClick={closeModal}
+          >
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="relative max-w-4xl max-h-[90vh] w-full"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Close Button */}
+              <button
+                onClick={closeModal}
+                className="absolute -top-12 right-0 z-10 p-2 text-white hover:text-gray-300 transition-colors"
+              >
+                <X className="w-8 h-8" />
+              </button>
+              
+              {/* Image */}
+              <div className="relative overflow-hidden rounded-lg shadow-2xl">
+                <img
+                  src={getImageUrl(activeProject.imageUrl)}
+                  alt={activeProject.title}
+                  className="w-full h-auto max-h-[80vh] object-contain"
+                />
+              </div>
+              
+              {/* Image Caption */}
+              <div className="mt-4 text-center">
+                <h3 className="text-xl font-semibold text-white mb-2">{activeProject.title}</h3>
+                <p className="text-gray-300">{activeProject.category}</p>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

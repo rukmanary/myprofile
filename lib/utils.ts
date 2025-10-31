@@ -48,3 +48,19 @@ export function throttle<T extends (...args: any[]) => any>(
     }
   };
 }
+
+/**
+ * Constructs full image URL from filename using R2_PUBLIC_URL environment variable
+ * @param filename - The image filename (e.g., "image.jpg")
+ * @returns Full URL to the image
+ */
+export function getImageUrl(filename: string): string {
+  // Use NEXT_PUBLIC_R2_PUBLIC_URL for client-side access, fallback to server-side R2_PUBLIC_URL
+  const baseUrl = process.env.NEXT_PUBLIC_R2_PUBLIC_URL || process.env.R2_PUBLIC_URL;
+
+  if (!baseUrl) {
+    console.warn('NEXT_PUBLIC_R2_PUBLIC_URL or R2_PUBLIC_URL environment variable is not set');
+    return filename; // Return filename as fallback
+  }
+  return `${baseUrl}/${filename}`;
+}

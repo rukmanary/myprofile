@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { PortfolioItem } from '@/types';
+import { getImageUrl } from '@/lib/utils';
 
 interface ProjectCarouselProps {
   portfolioItems: PortfolioItem[];
@@ -110,7 +111,7 @@ export function ProjectCarousel({
                   <div className="relative w-full h-full">
                     {/* Project Image */}
                     <img
-                      src={project.imageUrl}
+                      src={getImageUrl(project.imageUrl)}
                       alt={project.title}
                       className="w-full h-full object-cover transition-transform duration-300 group-hover/card:scale-110"
                     />
