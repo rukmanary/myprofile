@@ -24,7 +24,7 @@ export function ProjectDetails({
     const truncated = isLong
       ? project.description.substring(0, 150) + '...'
       : project.description;
-    
+
     return {
       isDescriptionLong: isLong,
       truncatedDescription: truncated
@@ -102,11 +102,6 @@ export function ProjectDetails({
               <ChevronDown className="w-4 h-4 group-hover:translate-y-0.5 transition-transform duration-200" />
             </motion.div>
           </motion.button>
-        )}
-
-        {/* Gradient Fade Effect for Truncated Text */}
-        {!isDescriptionExpanded && isDescriptionLong && (
-          <div className="absolute bottom-0 right-0 w-20 h-6 bg-linear-to-l from-black/80 to-transparent pointer-events-none" />
         )}
       </motion.div>
     </div>

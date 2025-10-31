@@ -104,7 +104,7 @@ export function PortfolioSection() {
                       onToggleDescription={toggleDescription}
                     />
                   </div>
-                  
+
                   {/* Right side - Image Thumbnail */}
                   <div className="lg:col-span-1">
                     <motion.div
@@ -211,7 +211,7 @@ export function PortfolioSection() {
               >
                 <X className="w-8 h-8" />
               </button>
-              
+
               {/* Image */}
               <div className="relative overflow-hidden rounded-lg shadow-2xl">
                 <img
@@ -220,7 +220,7 @@ export function PortfolioSection() {
                   className="w-full h-auto max-h-[80vh] object-contain"
                 />
               </div>
-              
+
               {/* Image Caption */}
               <div className="mt-4 text-center">
                 <h3 className="text-xl font-semibold text-white mb-2">{activeProject.title}</h3>
