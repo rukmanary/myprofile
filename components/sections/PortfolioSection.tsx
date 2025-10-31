@@ -80,6 +80,7 @@ export function PortfolioSection() {
               portfolioItems={portfolioItems}
               activeProjectIndex={activeProjectIndex}
               onProjectSelect={handleProjectSelect}
+              onImageClick={openModal}
             />
           </div>
 
@@ -94,41 +95,13 @@ export function PortfolioSection() {
                 transition={{ duration: 0.6 }}
                 className="w-full space-y-8"
               >
-                {/* Project Title & Description with Image Thumbnail */}
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-                  {/* Left side - Title and Description */}
-                  <div className="lg:col-span-2 space-y-6">
-                    <ProjectDetails
-                      project={activeProject}
-                      isDescriptionExpanded={isDescriptionExpanded}
-                      onToggleDescription={toggleDescription}
-                    />
-                  </div>
-
-                  {/* Right side - Image Thumbnail */}
-                  <div className="lg:col-span-1">
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 0.3 }}
-                      className="relative group cursor-pointer"
-                      onClick={openModal}
-                    >
-                      <div className="relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 group-hover:scale-105">
-                        <img
-                          src={getImageUrl(activeProject.imageUrl)}
-                          alt={activeProject.title}
-                          className="w-48 h-28 sm:w-56 sm:h-32 lg:w-64 lg:h-36 object-cover mx-auto"
-                        />
-                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
-                          <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/20 backdrop-blur-sm rounded-full p-3">
-                            <ExternalLink className="w-6 h-6 text-white" />
-                          </div>
-                        </div>
-                      </div>
-                      <p className="text-sm text-gray-400 mt-2 text-center">Click to view full image</p>
-                    </motion.div>
-                  </div>
+                {/* Project Title & Description */}
+                <div className="space-y-6">
+                  <ProjectDetails
+                    project={activeProject}
+                    isDescriptionExpanded={isDescriptionExpanded}
+                    onToggleDescription={toggleDescription}
+                  />
                 </div>
 
                 {/* Project Meta Info */}

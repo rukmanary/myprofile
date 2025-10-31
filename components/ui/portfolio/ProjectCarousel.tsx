@@ -11,6 +11,7 @@ interface ProjectCarouselProps {
   portfolioItems: PortfolioItem[];
   activeProjectIndex: number;
   onProjectSelect: (index: number) => void;
+  onImageClick?: () => void;
   className?: string;
 }
 
@@ -18,6 +19,7 @@ export function ProjectCarousel({
   portfolioItems,
   activeProjectIndex,
   onProjectSelect,
+  onImageClick,
   className = ''
 }: ProjectCarouselProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -25,7 +27,7 @@ export function ProjectCarousel({
 
   const scrollToProject = (direction: 'left' | 'right') => {
     if (carouselRef.current) {
-      const cardWidth = 160; // Adjusted for 3-card layout
+      const cardWidth = 200; // Adjusted for larger card layout (w-48 + gap)
       const scrollAmount = direction === 'left' ? -cardWidth : cardWidth;
       carouselRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     }
@@ -35,7 +37,7 @@ export function ProjectCarousel({
     onProjectSelect(index);
     // Scroll the selected card into view
     if (carouselRef.current) {
-      const cardWidth = 160;
+      const cardWidth = 200;
       const scrollPosition = index * cardWidth;
       carouselRef.current.scrollTo({ left: scrollPosition, behavior: 'smooth' });
     }
@@ -104,7 +106,7 @@ export function ProjectCarousel({
                 transition={{ duration: 0.3, ease: "easeOut" }}
                 style={{ transformOrigin: 'center center' }}
               >
-                <div className={`w-40 h-24 rounded-lg overflow-hidden border-2 transition-all duration-300 ${isActive
+                <div className={`w-48 h-28 sm:w-56 sm:h-32 lg:w-64 lg:h-36 rounded-lg overflow-hidden border-2 transition-all duration-300 ${isActive
                   ? 'border-neon-cyan shadow-xl shadow-neon-cyan/30'
                   : 'border-gray-700 hover:border-gray-500'
                   }`}>
@@ -116,42 +118,30 @@ export function ProjectCarousel({
                       className="w-full h-full object-cover transition-transform duration-300 group-hover/card:scale-110"
                     />
 
-                    {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent" />
-
-                    {/* Content Overlay */}
-                    <div className="absolute inset-0 p-2 flex flex-col justify-end">
-                      <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: isHovered || isActive ? 1 : 0.8, y: 0 }}
-                        transition={{ duration: 0.3 }}
+                    {/* Enlarge Button - Bottom Right Corner */}
+                    <div 
+                      className={`absolute bottom-2 right-2 backdrop-blur-sm rounded-full p-2 transition-all duration-200 shadow-lg ${
+                        isActive 
+                          ? 'bg-black/70 cursor-pointer hover:bg-black/80' 
+                          : 'bg-black/30 cursor-not-allowed opacity-50'
+                      }`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        if (isActive) {
+                          onImageClick?.();
+                        }
+                      }}
+                    >
+                      <svg 
+                        className={`w-4 h-4 transition-colors duration-200 ${
+                          isActive ? 'text-white' : 'text-gray-400'
+                        }`} 
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24"
                       >
-                        <h4 className={`font-semibold text-xs mb-1 transition-colors duration-300 truncate ${isActive ? 'text-neon-cyan' : 'text-white'
-                          }`}>
-                          {project.title}
-                        </h4>
-                        <p className="text-xs text-gray-300 capitalize truncate">{project.category}</p>
-
-                        {/* Tech Stack Preview - Only show 2 for compact view */}
-                        <div className="flex gap-1 mt-1">
-                          {project.technologies.slice(0, 2).map((tech) => (
-                            <span
-                              key={tech}
-                              className={`text-xs px-1 py-0.5 rounded transition-all duration-300 truncate ${isActive
-                                ? 'bg-neon-cyan/20 text-neon-cyan'
-                                : 'bg-gray-800/80 text-gray-300'
-                                }`}
-                            >
-                              {tech.length > 4 ? tech.substring(0, 4) + '...' : tech}
-                            </span>
-                          ))}
-                          {project.technologies.length > 2 && (
-                            <span className="text-xs px-1 py-0.5 bg-gray-800/80 text-gray-400 rounded">
-                              +{project.technologies.length - 2}
-                            </span>
-                          )}
-                        </div>
-                      </motion.div>
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
                     </div>
 
                     {/* Active Indicator */}
@@ -164,19 +154,7 @@ export function ProjectCarousel({
                       />
                     )}
 
-                    {/* Hover Play Button */}
-                    {isHovered && !isActive && (
-                      <motion.div
-                        className="absolute inset-0 flex items-center justify-center"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <div className="w-6 h-6 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
-                          <div className="w-0 h-0 border-l-4 border-l-white border-t-[3px] border-t-transparent border-b-[3px] border-b-transparent ml-0.5" />
-                        </div>
-                      </motion.div>
-                    )}
+
                   </div>
                 </div>
               </motion.div>
