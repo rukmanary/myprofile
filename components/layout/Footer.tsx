@@ -64,14 +64,6 @@ export function Footer() {
                   {personalInfo.email}
                 </a>
               </div>
-              <div>
-                <a
-                  href={`tel:${personalInfo.phone}`}
-                  className="text-gray-300 hover:text-neon-cyan transition-colors"
-                >
-                  {personalInfo.phone}
-                </a>
-              </div>
               <div className="text-gray-300">
                 {personalInfo.location.city}, {personalInfo.location.country}
               </div>

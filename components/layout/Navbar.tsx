@@ -186,15 +186,6 @@ export function Navbar() {
                       {personalInfo.email}
                     </a>
                   </div>
-                  <div>
-                    <p className="text-gray-400">Phone</p>
-                    <a
-                      href={`tel:${personalInfo.phone}`}
-                      className="text-white hover:text-neon-cyan transition-colors"
-                    >
-                      {personalInfo.phone}
-                    </a>
-                  </div>
                 </div>
               </div>
             </div>

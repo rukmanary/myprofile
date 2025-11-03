@@ -3,7 +3,6 @@ export interface PersonalInfo {
   title: string;
   subtitle: string;
   email: string;
-  phone: string;
   location: {
     city: string;
     country: string;
