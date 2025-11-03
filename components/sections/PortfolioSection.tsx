@@ -188,7 +188,7 @@ export function PortfolioSection() {
               {/* Image */}
               <div className="relative overflow-hidden rounded-lg shadow-2xl">
                 <img
-                  src={getImageUrl(activeProject.imageUrl)}
+                  src={getImageUrl(activeProject.imageName)}
                   alt={activeProject.title}
                   className="w-full h-auto max-h-[80vh] object-contain"
                 />

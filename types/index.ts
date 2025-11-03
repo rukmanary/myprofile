@@ -30,7 +30,7 @@ export interface PortfolioItem {
   title: string;
   description: string;
   technologies: string[];
-  imageUrl: string;
+  imageName: string;
   liveUrl?: string;
   githubUrl?: string;
   featured: boolean;

@@ -113,18 +113,17 @@ export function ProjectCarousel({
                   <div className="relative w-full h-full">
                     {/* Project Image */}
                     <img
-                      src={getImageUrl(project.imageUrl)}
+                      src={getImageUrl(project.imageName)}
                       alt={project.title}
                       className="w-full h-full object-cover transition-transform duration-300 group-hover/card:scale-110"
                     />
 
                     {/* Enlarge Button - Bottom Right Corner */}
-                    <div 
-                      className={`absolute bottom-2 right-2 backdrop-blur-sm rounded-full p-2 transition-all duration-200 shadow-lg ${
-                        isActive 
-                          ? 'bg-black/70 cursor-pointer hover:bg-black/80' 
+                    <div
+                      className={`absolute bottom-2 right-2 backdrop-blur-sm rounded-full p-2 transition-all duration-200 shadow-lg ${isActive
+                          ? 'bg-black/70 cursor-pointer hover:bg-black/80'
                           : 'bg-black/30 cursor-not-allowed opacity-50'
-                      }`}
+                        }`}
                       onClick={(e) => {
                         e.stopPropagation();
                         if (isActive) {
@@ -132,12 +131,11 @@ export function ProjectCarousel({
                         }
                       }}
                     >
-                      <svg 
-                        className={`w-4 h-4 transition-colors duration-200 ${
-                          isActive ? 'text-white' : 'text-gray-400'
-                        }`} 
-                        fill="none" 
-                        stroke="currentColor" 
+                      <svg
+                        className={`w-4 h-4 transition-colors duration-200 ${isActive ? 'text-white' : 'text-gray-400'
+                          }`}
+                        fill="none"
+                        stroke="currentColor"
                         viewBox="0 0 24 24"
                       >
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
