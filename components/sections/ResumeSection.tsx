@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Calendar, MapPin, Download, Award, Briefcase, GraduationCap } from 'lucide-react';
-import { experiences, education } from '@/lib/data';
+import { experiences, education, certifications } from '@/lib/data';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { TechStack } from '@/components/ui/resume';
@@ -161,18 +161,15 @@ export function ResumeSection() {
               </h4>
 
               <div className="space-y-3">
-                <div className="flex items-center justify-between p-4 bg-navy/30 rounded-lg border border-navy-light">
-                  <span className="text-white">AWS Certified Developer</span>
-                  <span className="text-neon-cyan text-sm">2023</span>
-                </div>
-                <div className="flex items-center justify-between p-4 bg-navy/30 rounded-lg border border-navy-light">
-                  <span className="text-white">Google Cloud Professional</span>
-                  <span className="text-neon-cyan text-sm">2022</span>
-                </div>
-                <div className="flex items-center justify-between p-4 bg-navy/30 rounded-lg border border-navy-light">
-                  <span className="text-white">React Developer Certification</span>
-                  <span className="text-neon-cyan text-sm">2021</span>
-                </div>
+                {certifications.map((cert) => (
+                  <div key={cert.id} className="flex items-center justify-between p-4 bg-navy/30 rounded-lg border border-navy-light">
+                    <div className="flex flex-col">
+                      <span className="text-white">{cert.name}</span>
+                      <span className="text-gray-400 text-sm">{cert.issuer}</span>
+                    </div>
+                    <span className="text-neon-cyan text-sm">{cert.year}</span>
+                  </div>
+                ))}
               </div>
             </motion.div>
           </motion.div>

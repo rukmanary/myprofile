@@ -48,7 +48,7 @@ export function AboutSection() {
             </div>
 
             {/* Personal Details */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-6">
+            <div className="space-y-6 pt-6">
               <div>
                 <h4 className="text-white font-semibold mb-2">Personal Details</h4>
                 <div className="space-y-2 text-sm">
@@ -69,10 +69,25 @@ export function AboutSection() {
 
               <div>
                 <h4 className="text-white font-semibold mb-2">Interests</h4>
-                <div className="space-y-2 text-sm">
-                  {personalInfo.interests.map((interest, index) => (
-                    <div key={index} className="text-gray-300">• {interest}</div>
-                  ))}
+                <div className={`text-sm ${personalInfo.interests.length > 4 ? 'grid grid-cols-2 gap-x-4' : 'space-y-2'}`}>
+                  {personalInfo.interests.length > 4 ? (
+                    <>
+                      <div className="space-y-2">
+                        {personalInfo.interests.slice(0, 4).map((interest, index) => (
+                          <div key={index} className="text-gray-300">• {interest}</div>
+                        ))}
+                      </div>
+                      <div className="space-y-2">
+                        {personalInfo.interests.slice(4).map((interest, index) => (
+                          <div key={index + 4} className="text-gray-300">• {interest}</div>
+                        ))}
+                      </div>
+                    </>
+                  ) : (
+                    personalInfo.interests.map((interest, index) => (
+                      <div key={index} className="text-gray-300">• {interest}</div>
+                    ))
+                  )}
                 </div>
               </div>
             </div>

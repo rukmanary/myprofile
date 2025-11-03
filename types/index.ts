@@ -78,3 +78,10 @@ export interface ContactFormData {
   subject: string;
   message: string;
 }
+
+export interface Certification {
+  id: string;
+  name: string;
+  issuer: string;
+  year: string;
+}
