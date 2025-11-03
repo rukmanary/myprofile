@@ -19,7 +19,7 @@ export function ContactSection() {
       icon: MapPin,
       title: 'Location',
       value: `${personalInfo.location.city}, ${personalInfo.location.country}`,
-      href: '#',
+      href: 'https://maps.app.goo.gl/KfeaABmzxtQvBKbd9',
       color: 'text-neon-cyan'
     },
     {
@@ -86,8 +86,10 @@ export function ContactSection() {
                         <div className="flex-1">
                           <h4 className="text-white font-semibold">{info.title}</h4>
                           <a
-                            href={info.href}
                             className={`${info.color} hover:underline transition-colors`}
+                            href={info.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
                           >
                             {info.value}
                           </a>
