@@ -67,7 +67,7 @@ export interface Education {
 
 export interface TechStackItem {
   name: string;
-  category: 'technology' | 'methodology' | 'tool';
+  category: 'Technology' | 'Methodology' | 'Tool';
   logo: string;
   color: string;
 }

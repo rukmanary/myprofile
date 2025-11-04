@@ -15,11 +15,11 @@ export function TechStack() {
     return techStack.filter(tech => {
       switch (activeFilter) {
         case 'technologies':
-          return tech.category === 'technology';
+          return tech.category === 'Technology';
         case 'methodologies':
-          return tech.category === 'methodology';
+          return tech.category === 'Methodology';
         case 'tools':
-          return tech.category === 'tool';
+          return tech.category === 'Tool';
         default:
           return true;
       }
@@ -95,18 +95,19 @@ export function TechStack() {
               className="group relative"
             >
               <div className={`
-              relative p-6 rounded-xl bg-linear-to-br ${tech.color} 
-              bg-opacity-10 border border-white/10 backdrop-blur-sm
-              hover:border-white/30 transition-all duration-300
-              hover:shadow-lg hover:shadow-white/10
-              flex flex-col items-center text-center space-y-3
-            `}>
+              relative p-6 rounded-xl bg-gray-900/70 
+               border border-white/20 backdrop-blur-sm
+               hover:border-white/40 transition-all duration-300
+               hover:shadow-lg hover:shadow-white/10
+               flex flex-col items-center text-center space-y-3
+             `}>
                 {/* Logo */}
                 <div className="relative w-12 h-12 flex items-center justify-center">
+                  <div className="absolute inset-0 rounded-full bg-black/40 ring-1 ring-white/10 -z-10" />
                   <img
                     src={tech.logo}
                     alt={tech.name}
-                    className="w-10 h-10 object-contain filter brightness-0 invert group-hover:brightness-100 group-hover:invert-0 transition-all duration-300"
+                    className="w-10 h-10 object-contain transition-all duration-300 z-10"
                     onError={(e) => {
                       // Fallback if image fails to load
                       const target = e.currentTarget;
@@ -133,9 +134,9 @@ export function TechStack() {
                 {/* Category Badge */}
                 <div className={`
                 px-2 py-1 rounded-full text-xs font-medium
-                ${tech.category === 'technology' ? 'bg-neon-cyan/20 text-neon-cyan border border-neon-cyan/30' : ''}
-                ${tech.category === 'methodology' ? 'bg-purple-500/20 text-purple-400 border border-purple-500/30' : ''}
-                ${tech.category === 'tool' ? 'bg-orange-500/20 text-orange-400 border border-orange-500/30' : ''}
+                ${tech.category === 'Technology' ? 'bg-neon-cyan/20 text-neon-cyan border border-neon-cyan/30' : ''}
+                ${tech.category === 'Methodology' ? 'bg-purple-500/20 text-purple-400 border border-purple-500/30' : ''}
+                ${tech.category === 'Tool' ? 'bg-orange-500/20 text-orange-400 border border-orange-500/30' : ''}
               `}>
                   {tech.category}
                 </div>
@@ -143,7 +144,7 @@ export function TechStack() {
                 {/* Hover Glow Effect */}
                 <div className={`
                 absolute inset-0 rounded-xl bg-linear-to-br ${tech.color} 
-                opacity-0 group-hover:opacity-20 transition-opacity duration-300 -z-10
+                opacity-20 group-hover:opacity-30 transition-opacity duration-300 -z-10
               `} />
               </div>
 
@@ -198,19 +199,19 @@ export function TechStack() {
         </div>
         <div>
           <div className="text-3xl sm:text-4xl font-bold text-neon-cyan mb-2">
-            {techStack.filter(tech => tech.category === 'technology').length}+
+            {techStack.filter(tech => tech.category === 'Technology').length}+
           </div>
           <div className="text-gray-400 text-sm">Technologies</div>
         </div>
         <div>
           <div className="text-3xl sm:text-4xl font-bold text-purple-400 mb-2">
-            {techStack.filter(tech => tech.category === 'methodology').length}+
+            {techStack.filter(tech => tech.category === 'Methodology').length}+
           </div>
           <div className="text-gray-400 text-sm">Methodologies</div>
         </div>
         <div>
           <div className="text-3xl sm:text-4xl font-bold text-orange-400 mb-2">
-            {techStack.filter(tech => tech.category === 'tool').length}+
+            {techStack.filter(tech => tech.category === 'Tool').length}+
           </div>
           <div className="text-gray-400 text-sm">Tools</div>
         </div>
