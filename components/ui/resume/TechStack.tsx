@@ -73,7 +73,10 @@ export function TechStack() {
       </div>
 
       {/* Tech Stack Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+      <div className="
+        grid grid-flow-col auto-cols-max grid-rows-2 gap-4 overflow-x-auto pb-2 snap-x snap-mandatory
+        sm:grid-flow-row sm:auto-cols-auto sm:grid-rows-none sm:overflow-x-visible sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 sm:gap-6
+      ">
         <AnimatePresence mode="popLayout">
           {filteredTechStack.map((tech, index) => (
             <motion.div
@@ -92,7 +95,7 @@ export function TechStack() {
                 rotateY: 5,
                 z: 10
               }}
-              className="group relative"
+              className="group relative snap-start"
             >
               <div className={`
               relative p-6 rounded-xl bg-gray-900/70 
