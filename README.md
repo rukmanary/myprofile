@@ -41,8 +41,6 @@
 - `npm run build` - Build for production
 - `npm run start` - Start production server
 - `npm run lint` - Run ESLint
-- `npm run test` - Run tests with Vitest
-- `npm run test:ui` - Run tests with Vitest UI
 
 ## 📱 Responsive Design
 
