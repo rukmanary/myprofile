@@ -38,6 +38,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Ryandhika Rukmana" }],
   creator: "Ryandhika Rukmana",
+  metadataBase: new URL("https://rukmana-dev.my.id"),
   openGraph: {
     type: "website",
     locale: "en_US",
