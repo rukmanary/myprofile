@@ -6,6 +6,7 @@ import { Menu, X, Download } from 'lucide-react';
 import { navItems, personalInfo } from '@/lib/data';
 import { Button } from '@/components/ui/Button';
 import { scrollToSection } from '@/lib/utils';
+import { trackEvent } from '@/lib/ga';
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,6 +34,7 @@ export function Navbar() {
   }, []);
 
   const handleNavClick = (sectionId: string) => {
+    trackEvent({ action: 'nav_click', category: 'navigation', label: sectionId });
     scrollToSection(sectionId);
     setIsOpen(false);
   };
@@ -52,7 +54,10 @@ export function Navbar() {
             {navItems.map((item) => (
               <button
                 key={item.id}
-                onClick={() => scrollToSection(item.id)}
+                onClick={() => {
+                  trackEvent({ action: 'nav_click', category: 'navigation', label: item.id });
+                  scrollToSection(item.id);
+                }}
                 className={`relative px-4 py-2 text-sm font-medium transition-all duration-300 ${activeSection === item.id
                   ? 'text-neon-cyan'
                   : 'text-gray-300 hover:text-white'
@@ -74,7 +79,10 @@ export function Navbar() {
           {/* CTA Button */}
           <Button
             variant="primary"
-            onClick={() => scrollToSection('contact')}
+            onClick={() => {
+              trackEvent({ action: 'cta_click', category: 'navigation', label: 'contact' });
+              scrollToSection('contact');
+            }}
             className="px-6"
           >
             Let&apos;s Talk
@@ -157,6 +165,7 @@ export function Navbar() {
                   variant="neon"
                   className="w-full"
                   onClick={() => {
+                    trackEvent({ action: 'resume_download', category: 'engagement', label: 'navbar_mobile' });
                     window.open('/resume.pdf', '_blank');
                     setIsOpen(false);
                   }}

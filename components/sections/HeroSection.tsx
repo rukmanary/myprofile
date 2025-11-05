@@ -7,6 +7,7 @@ import { personalInfo } from '@/lib/data';
 import { Button } from '@/components/ui/Button';
 import { scrollToSection } from '@/lib/utils';
 import { useUserRegion } from '@/hooks/useUserRegion';
+import { trackEvent } from '@/lib/ga';
 
 export function HeroSection() {
   const parallaxRef = useRef<HTMLDivElement>(null);
@@ -127,7 +128,10 @@ export function HeroSection() {
             <Button
               variant="neon"
               size="lg"
-              onClick={() => window.open('/resume.pdf', '_blank')}
+              onClick={() => {
+                trackEvent({ action: 'resume_download', category: 'engagement', label: 'hero' });
+                window.open('/resume.pdf', '_blank');
+              }}
               className="w-full sm:w-auto"
             >
               <Mail className="w-5 h-5 mr-2" />
@@ -170,7 +174,10 @@ export function HeroSection() {
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
       >
         <button
-          onClick={() => scrollToSection('portfolio')}
+          onClick={() => {
+            trackEvent({ action: 'scroll_indicator_click', category: 'navigation', label: 'portfolio' });
+            scrollToSection('portfolio');
+          }}
           className="flex flex-col items-center space-y-2 text-gray-400 hover:text-neon-cyan transition-colors group"
         >
           <span className="text-sm">Scroll Down</span>

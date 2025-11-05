@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/Input';
 import { Textarea } from '@/components/ui/Textarea';
 import { validateEmail } from '@/lib/utils';
 import { ContactFormData } from '@/types';
+import { trackEvent } from '@/lib/ga';
 
 export function ContactForm() {
   const [formData, setFormData] = useState<ContactFormData>({
@@ -51,10 +52,15 @@ export function ContactForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!validateForm()) return;
+    if (!validateForm()) {
+      trackEvent({ action: 'contact_validation_error', category: 'form' });
+      return;
+    }
 
     setIsSubmitting(true);
     setSubmitStatus('idle');
+
+    trackEvent({ action: 'contact_submit_attempt', category: 'form' });
 
     try {
       const res = await fetch('/api/contact', {
@@ -71,9 +77,11 @@ export function ContactForm() {
       setSubmitStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
       setErrors({});
+      trackEvent({ action: 'contact_submit', category: 'form', label: 'success' });
     } catch (error) {
       console.error('contact-submit-error', error);
       setSubmitStatus('error');
+      trackEvent({ action: 'contact_submit', category: 'form', label: 'error' });
     } finally {
       setIsSubmitting(false);
     }

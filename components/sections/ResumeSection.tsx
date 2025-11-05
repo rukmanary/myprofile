@@ -6,6 +6,7 @@ import { experiences, education, certifications } from '@/lib/data';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { TechStack } from '@/components/ui/resume';
+import { trackEvent } from '@/lib/ga';
 
 export function ResumeSection() {
 
@@ -30,6 +31,7 @@ export function ResumeSection() {
             variant="neon"
             size="lg"
             onClick={() => {
+              trackEvent({ action: 'resume_download', category: 'engagement', label: 'resume_section' });
               const link = document.createElement('a');
               link.href = '/resume.pdf';
               link.download = 'Ryandhika-Rukmana-Resume.pdf';

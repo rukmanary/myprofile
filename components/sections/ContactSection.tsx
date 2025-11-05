@@ -5,6 +5,7 @@ import { Mail, MapPin, Linkedin } from 'lucide-react';
 import { personalInfo, socialLinks } from '@/lib/data';
 import { Card, CardContent } from '@/components/ui/Card';
 import { ContactForm } from '@/components/ui/contact';
+import { trackEvent } from '@/lib/ga';
 
 export function ContactSection() {
   const contactInfo = [
@@ -90,6 +91,7 @@ export function ContactSection() {
                             href={info.href}
                             target="_blank"
                             rel="noopener noreferrer"
+                            onClick={() => trackEvent({ action: 'contact_info_click', category: 'engagement', label: info.title })}
                           >
                             {info.value}
                           </a>

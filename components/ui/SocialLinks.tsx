@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { socialLinks } from '@/lib/data';
+import { trackEvent } from '@/lib/ga';
 
 interface SocialLinksProps {
   layout?: 'vertical' | 'horizontal';
@@ -72,6 +73,7 @@ export function SocialLinks({
               title={link.platform}
               className={`social-icon-${variant}`}
               style={{ '--color': platformColor } as React.CSSProperties}
+              onClick={() => trackEvent({ action: 'social_click', category: 'social', label: link.platform })}
             >
               <i className={iconClass}></i>
             </a>
